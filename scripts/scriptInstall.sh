@@ -24,7 +24,5 @@ sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashi
 sudo yum -y install nomad
 sudo systemctl start nomad.service
 
-echo create webserver job...
-nomad job plan /vagrant/webserver-job/webserver.nomad
-nomad job run /vagrant/webserver-job/webserver.nomad
+
 

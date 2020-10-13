@@ -9,6 +9,11 @@ Vagrant.configure("2") do |config|
     server.vm.hostname = "server"
     server.vm.network "private_network", ip: "192.168.60.101"
     server.vm.provision "shell", path: "scripts/scriptInstall.sh"
+    server.vm.provision "shell", inline: <<-SHELL
+    echo create webserver job...
+    sudo nomad job plan /vagrant/webserver-job/webserver.nomad
+    sudo nomad job run /vagrant/webserver-job/webserver.nomad
+    SHELL
   end
   
 
