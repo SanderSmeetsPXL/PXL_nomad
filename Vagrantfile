@@ -3,6 +3,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.provision "shell", inline: "hostname"
   config.vm.box = "centos/7"
+ 
 
   config.vm.define "server" do |server|
     server.vm.hostname = "server"
