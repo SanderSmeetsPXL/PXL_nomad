@@ -6,7 +6,7 @@ cat <<-EOF
   Requires=network-online.target
   After=consul.service
   [Service]
-  ExecStart= /bin/sh -c "/usr/bin/nomad agent -config=/vagrant/nomad-configs/client2.hcl"
+  ExecStart= /bin/sh -c "/usr/bin/nomad agent -config=/vagrant/nomad-configs/agent2.hcl"
   ExecReload=/bin/kill -HUP $MAINPID
   Restart=on-failure
   [Install]
