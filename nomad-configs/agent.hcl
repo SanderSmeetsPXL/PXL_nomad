@@ -1,6 +1,7 @@
 log_level = "DEBUG"
 
 data_dir = "/tmp/client"
+bind_addr= "192.168.60.102"
 
 client {
 	enabled = true
