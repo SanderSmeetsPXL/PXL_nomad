@@ -1,12 +1,13 @@
 log_level = "DEBUG"
 
 data_dir = "/tmp/client"
-bind_addr= "192.168.60.103"
+bind_addr= "192.168.60.102"
 name = "agent1"
 
 client {
 	enabled = true
-	servers = 192.168.60.101:4647
+	servers = ["192.168.60.101:4647"]
+
 }
 
 ports {

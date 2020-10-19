@@ -6,7 +6,7 @@ name = "agent2"
 
 client {
 	enabled = true
-	servers = 192.168.60.101:4647
+	servers = ["192.168.60.101:4647"]
 }
 
 ports {

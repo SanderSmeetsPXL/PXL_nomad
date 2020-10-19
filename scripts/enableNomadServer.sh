@@ -13,5 +13,5 @@ cat <<-EOF
   WantedBy=multi-user.target
 EOF
 ) | tee /etc/systemd/system/nomad.service
-sudo systemctl enable nomad.service
-sudo systemctl start nomad.service
+systemctl enable nomad.service
+systemctl start nomad.service
