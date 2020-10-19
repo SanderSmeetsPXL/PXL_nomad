@@ -1,7 +1,7 @@
 log_level = "DEBUG"
 
 data_dir = "/tmp/client"
-bind_addr= "192.168.60.102"
+bind_addr= "192.168.60.103"
 name = "agent2"
 
 client {
