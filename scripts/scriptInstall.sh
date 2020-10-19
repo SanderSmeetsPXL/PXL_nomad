@@ -13,10 +13,25 @@ sudo systemctl start docker.service
 echo Installing consul...
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
-sudo yum -y install consul
+sudo yum -y install consul 
 echo Consul installed
-echo Starting Consul...
-sudo systemctl start consul.service
+echo start consul systemctl
+(
+cat <<-EOF
+  [Unit]
+  Description=consul agent
+  Requires=network-online.target
+  After=network-online.target
+  [Service]
+  Restart=on-failure
+  ExecStart=/usr/bin/consul agent -dev
+  ExecReload=/bin/kill -HUP $MAINPID
+  [Install]
+  WantedBy=multi-user.target
+EOF
+) | sudo tee /etc/systemd/system/consul.service
+sudo systemctl enable consul.service
+sudo systemctl start consul
 
 
 echo install nomad 
