@@ -28,4 +28,12 @@ sudo systemctl start consul
 echo install nomad 
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 sudo yum -y install nomad
-
+echo Enabling nomad systemd unit...
+if [[ "$HOSTNAME" == "server" ]]; then
+	cp /vagrant/nomad-configs/server.hcl /etc/nomad.d/nomad.hcl
+else
+	cp /vagrant/nomad-configs/client.hcl /etc/nomad.d/nomad.hcl
+fi
+cp /vagrant/systemd-units/nomad.service /etc/systemd/system/nomad.service
+systemctl enable nomad.service
+systemctl start nomad.service

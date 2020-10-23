@@ -1,0 +1,10 @@
+[Unit]
+Description=nomad agent
+Requires=network-online.target
+After=consul.service
+[Service]
+ExecStart=/usr/bin/nomad agent -config=/etc/nomad.d
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+
