@@ -8,3 +8,7 @@ server {
 
 	bootstrap_expect = 1
 }
+
+consul {
+	address = "192.168.60.101:8500"
+}

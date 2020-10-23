@@ -1,0 +1,9 @@
+[Unit]
+Description=consul agent
+Requires=network-online.target
+After=network-online.target
+[Service]
+Restart=on-failure
+ExecStart=/usr/bin/consul agent -server -bind '{{ GetInterfaceIP "eth1" }}' -client '{{ GetInterfaceIP "eth1" }}' -data-dir "/tmp/consul" -bootstrap-expect 1
+[Install]
+WantedBy=multi-user.target

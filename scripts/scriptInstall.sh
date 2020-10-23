@@ -16,20 +16,11 @@ sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashi
 sudo yum -y install consul 
 echo Consul installed
 echo start consul systemctl
-(
-cat <<-EOF
-  [Unit]
-  Description=consul agent
-  Requires=network-online.target
-  After=network-online.target
-  [Service]
-  Restart=on-failure
-  ExecStart=/usr/bin/consul agent -dev
-  ExecReload=/bin/kill -HUP $MAINPID
-  [Install]
-  WantedBy=multi-user.target
-EOF
-) | sudo tee /etc/systemd/system/consul.service
+if [[ "$HOSTNAME" == "server" ]]; then
+	cp /vagrant/systemd-units/consul-server.service /etc/systemd/system/consul.service
+else
+	cp /vagrant/systemd-units/consul-client.service /etc/systemd/system/consul.service
+fi
 sudo systemctl enable consul.service
 sudo systemctl start consul
 
