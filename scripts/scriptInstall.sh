@@ -17,10 +17,11 @@ sudo yum -y install consul
 echo Consul installed
 echo start consul systemctl
 if [[ "$HOSTNAME" == "server" ]]; then
-	cp /vagrant/systemd-units/consul-server.service /etc/systemd/system/consul.service
+	cp /vagrant/consul-configs/server.hcl /etc/consul.d/consul.hcl
 else
-	cp /vagrant/systemd-units/consul-client.service /etc/systemd/system/consul.service
+	cp /vagrant/consul-configs/client.hcl /etc/consul.d/consul.hcl
 fi
+cp /vagrant/systemd-units/consul.service /etc/systemd/system/consul.service
 sudo systemctl enable consul.service
 sudo systemctl start consul
 
