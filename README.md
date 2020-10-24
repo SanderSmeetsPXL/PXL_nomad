@@ -23,6 +23,9 @@ Als dit gebeurt is wordt via een copy commando de service file gekopieerd naar d
 
 # Bron vermelding
 https://www.nomadproject.io/docs/configuration
+
 https://learn.hashicorp.com/nomad
+
 https://www.nomadproject.io/docs/integrations/consul-integration
+
 https://learn.hashicorp.com/tutorials/nomad/get-started-cluster?in=nomad/get-started 
