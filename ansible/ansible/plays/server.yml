@@ -8,6 +8,18 @@
       yum:
         name: yum-utils
 
+- name: add hashicorp repo
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: add hashicorp repo
+      yum_repository:
+        name: hashicorp
+        description: adds hashicorp repo
+        baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+
+
 - name: playbook for docker
   hosts: all
   become: yes
