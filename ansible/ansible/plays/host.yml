@@ -1,7 +1,0 @@
----
-- name: playbook for host vm
-  hosts: hosts
-  become: yes
-
-  roles:
-    - role: software/docker

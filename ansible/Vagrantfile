@@ -29,7 +29,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     host1.vm.network "private_network", ip: "10.0.0.11"
     host1.vm.provision "ansible" do |ansible|
       ansible.config_file = "ansible/ansible.cfg"
-      ansible.playbook = "ansible/plays/host.yml"
+      ansible.playbook = "ansible/plays/server.yml"
+      ansible.groups = {
+        "hosts" => ["host1"]}
     end
   end
 
@@ -38,7 +40,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     host2.vm.network "private_network", ip: "10.0.0.12"
     host2.vm.provision "ansible" do |ansible|
       ansible.config_file = "ansible/ansible.cfg"
-      ansible.playbook = "ansible/plays/host.yml"
+      ansible.playbook = "ansible/plays/server.yml"
+      ansible.groups = {
+        "hosts" => ["host2"]}
     end
   end
 end
