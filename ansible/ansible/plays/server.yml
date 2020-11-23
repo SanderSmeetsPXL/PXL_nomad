@@ -1,11 +1,17 @@
 ---
 - name: add yum-utils
-  sudo: yes
-  yum:
-    name: yum-utils
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: add yum-utils
+      yum:
+        name: yum-utils
 
 - name: playbook for docker
   hosts: all
+  become: yes
+
   roles:
     - role: software/docker
 
