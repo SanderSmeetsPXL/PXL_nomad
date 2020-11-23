@@ -7,3 +7,8 @@ docker_package_state: present
 docker_service_state: started
 docker_service_enabled: true
 docker_restart_handler_state: restarted
+
+docker_yum_repo_url: http://download.docker.com/linux/centos/docker-ce.repo
+docker_yum_repo_enable_edge: '0'
+docker_yum_repo_enable_test: '0'
+docker_yum_gpg_key: https://download.docker.com/linux/centos/gpg 
