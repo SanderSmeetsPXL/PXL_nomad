@@ -43,7 +43,7 @@
     path=/etc/systemd/system/nomad.service
 - name: Create nomad.service configuration
   template: >
-    src=nomad.service.j2
+    src=nomad.service
     dest=/etc/systemd/system/nomad.service
     owner=root
     group=root
@@ -52,7 +52,7 @@
 
 - name: Create Nomad configuration file
   template: >
-    src=base.hcl.j2
+    src=base.hcl
     dest={{ nomad_config_dir }}/base.hcl
     owner=root
     group=root
@@ -62,7 +62,7 @@
 
 - name: Create Nomad server configuration file
   template: >
-    src=server.hcl.j2
+    src=server.hcl
     dest={{ nomad_config_dir }}/server.hcl
     owner=root
     group=root
@@ -72,7 +72,7 @@
   
 - name: Create Nomad client configuration file
   template: >
-    src=client.hcl.j2
+    src=client.hcl
     dest={{ nomad_config_dir }}/client.hcl
     owner=root
     group=root
