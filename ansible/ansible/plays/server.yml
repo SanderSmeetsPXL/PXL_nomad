@@ -20,11 +20,13 @@
       yum:
         name: yum-utils
 
-- name: playbook for docker
+- name: role for docker,nomad
   hosts: all
   become: yes
 
   roles:
     - role: software/docker
+    - role: software/nomad
+
 
 

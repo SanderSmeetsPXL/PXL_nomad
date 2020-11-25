@@ -1,0 +1,5 @@
+---
+nomad_version: 0.12.9
+
+nomad_client: false
+nomad_server: true
