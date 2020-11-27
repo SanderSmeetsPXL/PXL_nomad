@@ -1,3 +1,7 @@
 ---
+- name: Check Consul
+  import_tasks: check.yml
+
 - name: Install Consul
   import_tasks: install.yml
+  when: consul_version.rc != 0
