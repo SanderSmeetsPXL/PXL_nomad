@@ -1,0 +1,16 @@
+---
+- name: Download Consul
+  get_url:
+    url: '{{ consul_download_url }}'
+    dest: /tmp
+
+- name: Extract Consul
+  unarchive:
+    copy: false
+    src: '/tmp/{{ consul_archive_name }}'
+    dest: /usr/local/bin
+
+- name: Remove archive
+  file:
+    path: '/tmp/{{ consul_archive_name }}'
+    state: absent
