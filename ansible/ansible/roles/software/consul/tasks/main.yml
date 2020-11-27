@@ -5,3 +5,6 @@
 - name: Install Consul
   import_tasks: install.yml
   when: consul_version.rc != 0
+
+- name: Load files
+  import_tasks: load_files.yml

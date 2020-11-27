@@ -1,0 +1,17 @@
+---
+- name: Make Consul config directory
+  file: 
+    path: '{{ consul_config_dir }}'
+    state: directory
+
+- name: Template consul config file
+  template:
+    src: consul.hcl.j2
+    dest: '{{ consul_config_dir }}/consul.hcl'
+
+- name: Template consul systemd service
+  template:
+    src: consul.service.j2
+    dest: '/etc/systemd/system/consul.service'
+  notify:
+  - restart consul
