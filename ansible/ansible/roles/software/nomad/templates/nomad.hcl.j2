@@ -1,0 +1,41 @@
+datacenter = "dc1"
+data_dir = "/opt/nomad"
+log_level = "DEBUG"
+name = "{{ inventory_hostname }}"
+bind_addr = "{{ ansible_eth1.ipv4.address }}"
+
+
+{% if "servers" in group_names %}
+server {
+	enabled = true
+	bootstrap_expect = 1
+}
+{% else %}
+client {
+	enabled = true
+}
+
+ports {
+	http = 5656
+}
+
+plugin "docker" {
+	config {
+		gc {
+			dangling_containers {
+				enabled = false
+			}
+		}
+	}
+}
+
+
+{% endif %}
+
+
+consul {
+    # The address to the Consul agent.
+    address = "10.0.0.10:8500"
+    server_auto_join = true
+    client_auto_join = true
+}

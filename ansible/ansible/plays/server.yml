@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 - name: add hashicorp repo
   hosts: all
   become: yes
@@ -30,9 +31,13 @@
         name: unzip
 
 - name: roles
+=======
+- name: Roles for required software
+>>>>>>> f683f32d784e77ead1af0e47dfabb6d90b551172
   hosts: all
   become: yes
 
   roles:
+    - role: software/prereq
     - role: software/docker
     - role: software/nomad
