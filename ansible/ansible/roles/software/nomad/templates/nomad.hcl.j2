@@ -13,6 +13,7 @@ server {
 {% else %}
 client {
 	enabled = true
+	servers = ["10.0.0.10:4647"]
 }
 
 ports {
@@ -28,7 +29,6 @@ plugin "docker" {
 		}
 	}
 }
-
 
 {% endif %}
 
