@@ -5,5 +5,4 @@ nomad_download_dir: /tmp
 nomad_install_dir: /usr/bin
 nomad_service_name: nomad
 nomad_install_location_dir: /usr/local/bin
-nomad_config_dir: /var/lib/nomad/conf
 nomad_etc_dir: /etc/nomad.d
