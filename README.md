@@ -1,27 +1,15 @@
-# Nomad consul
+Er werd gekozen om Ansible te gebruiken voor de uitwerking van dit project. De uitwerken heeft dus geheel plaatsgevonden onder de ansible directory.
 
-The aim of this project is to provide a development environment based on [consul](https://www.consul.io) and [nomad](https://www.nomadproject.io) to manage container based microservices.
+# Playbooks
+De playbook bevat enkel referenties naar roles die alle tasks uitvoeren.
 
-The following steps should make that clear;
+# Prereq
+Deze role installeerd alle software die nodig is om de andere roles te doen werken, o.a. unzip.
 
-bring up the environment by using [vagrant](https://www.vagrantup.com) which will create centos 7 virtualbox machine or lxc container.
+# Docker
 
-The proved working vagrant providers used on an [ArchLinux](https://www.archlinux.org/) system are
-* [vagrant-lxc](https://github.com/fgrehm/vagrant-lxc)
-* [vagrant-libvirt](https://github.com/vagrant-libvirt/)
-* [virtualbox](https://www.virtualbox.org/)
+# Consul
+Consul wordt geïnstalleerd via een archief van de Hashicorp website. Er wordt eerst gecontroleerd of Consul al geïnstalleerd is om te verkomen dat er onnodig gedownload wordt. Via een template wordt het juiste configuratiebestand gekopieerd naar server en hosts. Er is ook een handler aanwezig die geroepen wordt bij het wijzigen van het systemd service bestand.
 
-```bash
-    $ vagrant up --provider lxc
-    OR
-    $ vagrant up --provider libvirt
-    OR
-    $ vagrant up --provider virtualbox
-```
+# Nomad
 
-Once it is finished, you should be able to connect to the vagrant environment through SSH and interact with Nomad:
-
-```bash
-    $ vagrant ssh
-    [vagrant@nomad ~]$
-```
