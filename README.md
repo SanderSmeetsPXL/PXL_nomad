@@ -7,7 +7,7 @@ De playbook bevat enkel referenties naar roles die alle tasks uitvoeren.
 Deze role installeerd alle software die nodig is om de andere roles te doen werken, o.a. unzip.
 
 # Docker
-Docker wordt via een role geïnstalleerd. De repository van docker-ce edition wordt gedownload en gekopieerd naar de server en clients. Het toevoegen van docker gebeurt in de task setup-centos.yml. Er wordt gecontroleerd dat de containerd.io zeker is geïnstalleerd omdat deze niet mag ontbreken. Verder wordt er gecontroleerd of docker opstart bij een boot.   
+Docker wordt via een role geïnstalleerd. De repository van docker-ce edition wordt gedownload en gekopieerd naar de server en clients. Het toevoegen van docker gebeurt in de task setup-centos.yml. Er wordt gecontroleerd dat de containerd.io zeker is geïnstalleerd omdat deze niet mag ontbreken. Verder wordt er gecontroleerd of docker opstart bij het opstarten van de systemen.   
 
 # Consul
 Consul wordt geïnstalleerd via een archief van de Hashicorp website. Er wordt eerst gecontroleerd of Consul al geïnstalleerd is om te verkomen dat er onnodig gedownload wordt. Via een template wordt het juiste configuratiebestand gekopieerd naar server en hosts. Er is ook een handler aanwezig die geroepen wordt bij het wijzigen van het systemd service bestand.
