@@ -13,7 +13,7 @@ Docker wordt via een role geïnstalleerd. De repository van docker-ce edition wo
 Consul wordt geïnstalleerd via een archief van de Hashicorp website. Er wordt eerst gecontroleerd of Consul al geïnstalleerd is om te verkomen dat er onnodig gedownload wordt. Via een template wordt het juiste configuratiebestand gekopieerd naar server en hosts. Er is ook een handler aanwezig die geroepen wordt bij het wijzigen van het systemd service bestand.
 
 # Nomad
-De nomad zip file wordt van de hashicorp website geïnstalleerd. De zip wordt gekopieerd naar de server en clients en uitgepakt in de destination folder. Een nomad configuratie directory wordt aangemaakt. Hierin wordt de hcl file met de configuratie in geplaatst. De file met de nomad service wordt ook toegevoegd in systemd. Dit wordt gedaan zodat nomad bij een boot wordt opgestart. In de service file wordt er verwezen naar de hcl configuratie file, waarin de server en clients configuratie in staat.
+De nomad zip file wordt van de hashicorp website geïnstalleerd. De zip wordt gekopieerd naar de server en clients en uitgepakt in de destination folder. Een nomad configuratie directory wordt aangemaakt. Hierin wordt de hcl file met de configuratie in geplaatst. De file met de nomad service wordt ook toegevoegd in systemd. Dit wordt gedaan zodat nomad bij de boot wordt opgestart. In de service file wordt er verwezen naar de hcl configuratie file, waarin de server en clients configuratie in staat.
 
 
 # Taakverdeling
