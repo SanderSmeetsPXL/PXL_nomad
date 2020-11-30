@@ -13,11 +13,6 @@ server {
 {% else %}
 client {
 	enabled = true
-	servers = ["10.0.0.10:4647"]
-}
-
-ports {
-	http = 5656
 }
 
 plugin "docker" {
@@ -32,10 +27,3 @@ plugin "docker" {
 
 {% endif %}
 
-
-consul {
-    # The address to the Consul agent.
-    address = "10.0.0.10:8500"
-    server_auto_join = true
-    client_auto_join = true
-}
