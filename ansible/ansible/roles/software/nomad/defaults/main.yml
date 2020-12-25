@@ -1,0 +1,8 @@
+---
+nomad_version: 0.12.9
+nomad_download_url: https://releases.hashicorp.com/nomad/0.12.9/nomad_0.12.9_linux_amd64.zip
+nomad_download_dir: /tmp
+nomad_install_dir: /usr/bin
+nomad_service_name: nomad
+nomad_install_location_dir: /usr/local/bin
+nomad_etc_dir: /etc/nomad.d

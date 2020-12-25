@@ -1,7 +1,10 @@
 ---
-- name: playbook for server vm
-  hosts: servers
+- name: Roles for required software
+  hosts: all
   become: yes
 
   roles:
-    - role: software/crond
+    - role: software/prereq
+    - role: software/consul
+    - role: software/docker
+    - role: software/nomad

@@ -1,0 +1,11 @@
+---
+- name: Add Docker repository.
+  get_url:
+    url: "{{ docker_yum_repo_url }}"
+    dest: '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
+
+- name: Ensure containerd.io is installed.
+  package:
+    name: containerd.io
+    state: present
+

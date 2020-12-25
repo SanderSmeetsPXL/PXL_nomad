@@ -1,0 +1,9 @@
+[Unit]
+Description=consul agent
+Requires=network-online.target
+After=network-online.target
+[Service]
+Restart=on-failure
+ExecStart={{ consul_install_location_dir }}/consul agent -config-dir {{ consul_config_dir }}
+[Install]
+WantedBy=multi-user.target

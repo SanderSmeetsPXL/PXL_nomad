@@ -1,0 +1,4 @@
+---
+- name: Add unzip
+  yum:
+    name: unzip

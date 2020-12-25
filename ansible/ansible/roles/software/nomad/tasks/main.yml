@@ -1,0 +1,33 @@
+---
+- name: Download nomad
+  get_url:
+    url: '{{ nomad_download_url }}'
+    dest: '{{ nomad_download_dir }}'
+
+- name: Extract nomad
+  unarchive:
+    copy: false
+    src: '/tmp/nomad_0.12.9_linux_amd64.zip'
+    dest: '{{ nomad_install_location_dir }}'
+
+- name: Remove archive
+  file:
+    path: '/tmp/nomad_0.12.9_linux_amd64.zip'
+    state: absent
+
+- name: Create Nomad configuration directory
+  file: 
+    path: '{{ nomad_etc_dir }}'
+    state: directory
+
+- name: Template nomad systemd service
+  template:
+    src: nomad.service.j2
+    dest: '/etc/systemd/system/nomad.service'
+  notify:
+  - restart nomad
+
+- name: Template nomad config file
+  template:
+    src: nomad.hcl.j2
+    dest: '{{ nomad_etc_dir }}/nomad.hcl'
