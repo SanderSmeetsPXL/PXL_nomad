@@ -2,13 +2,16 @@ job "prometheus" {
   datacenters = ["dc1"]
   type = "service"
 
-  group "app" {
+  group "monitoring" {
     count = 1
-
     restart {
-      attempts = 3
-      delay    = "15s"
-      mode     = "fail"
+      attempts = 2
+      interval = "30m"
+      delay = "15s"
+      mode = "fail"
+    }
+    ephemeral_disk {
+      size = 300
     }
 
     task "prometheus" {
