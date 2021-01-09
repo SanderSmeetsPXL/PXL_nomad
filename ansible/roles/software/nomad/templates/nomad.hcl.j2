@@ -14,19 +14,19 @@ server {
 client {
 	enabled = true
 	network_interface = "eth1"
-	alloc_dir = "/tmp/nomad-allocations"
-    options = {
-    "docker.volumes.enabled" = true
-    }
-
 }
+{% endif %}
 
 plugin "docker" {
     config {
-       allow_caps = [ "ALL" ]
-    }
+		gc {
+			dangling_containers {
+				enabled = false
+			}
+		}
+        volumes {
+            enabled = true
+        }
+	}
 }
-
-
-{% endif %}
 
