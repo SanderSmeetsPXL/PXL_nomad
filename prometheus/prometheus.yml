@@ -1,7 +1,9 @@
+---
 global:
   scrape_interval:     5s
   evaluation_interval: 5s
 
+<<<<<<< HEAD
 alerting:
   alertmanagers:
   - consul_sd_configs:
@@ -16,9 +18,12 @@ scrape_configs:
     - server: '10.0.0.10:8500'
       services: ['alertmanager']
 
+=======
+scrape_configs:
+>>>>>>> 09ec5f796cc94b3acfa35bf9ee734823e94aa50e
   - job_name: 'nomad_metrics'
-
     consul_sd_configs:
+<<<<<<< HEAD
     - server: '10.0.0.10:8500'
       services: ['nomad-client', 'nomad']
 
@@ -27,10 +32,20 @@ scrape_configs:
       regex: '(.*)http(.*)'
       action: keep
 
+=======
+      - server: '10.0.0.10:8500'
+        datacenter: 'dc1'
+        services: ['nomad-client', 'nomad']
+    relabel_configs:
+      - source_labels: ['__meta_consul_tags']
+        regex: '(.*)http(.*)'
+        action: keep
+>>>>>>> 09ec5f796cc94b3acfa35bf9ee734823e94aa50e
     scrape_interval: 5s
     metrics_path: /v1/metrics
     params:
       format: ['prometheus']
+<<<<<<< HEAD
 
   - job_name: 'node_exporter'                 
     consul_sd_configs:                        
@@ -42,3 +57,6 @@ scrape_configs:
         action: keep
       - source_labels: [__meta_consul_service]
         target_label: job
+=======
+      
+>>>>>>> 09ec5f796cc94b3acfa35bf9ee734823e94aa50e
