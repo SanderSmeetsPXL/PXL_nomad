@@ -10,15 +10,6 @@ alerting:
       services: ['alertmanager']
 
 scrape_configs:
-
-  - job_name: 'alertmanager'
-
-    consul_sd_configs:
-    - server: '10.0.0.10:8500'
-      services: ['alertmanager']
-
-
-scrape_configs:
   - job_name: 'nomad_metrics'
     consul_sd_configs:
       - server: '10.0.0.10:8500'
