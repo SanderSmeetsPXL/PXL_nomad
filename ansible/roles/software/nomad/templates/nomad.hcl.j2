@@ -14,17 +14,20 @@ server {
 client {
 	enabled = true
 	network_interface = "eth1"
+	alloc_dir = "/tmp/nomad-allocations"
+    options = {
+    "docker.volumes.enabled" = true
+    }
+
 }
 
 plugin "docker" {
-	config {
-		gc {
-			dangling_containers {
-				enabled = false
-			}
-		}
-	}
+    config {
+#       allow_caps = [ "CHOWN,DAC_OVERRIDE,FSETID,FOWNER,MKNOD,NET_RAW,SETGID,SETUID,SETFCAP,SETPCAP,NET_BIND_SERVICE,SYS_CHROOT,KILL,AUDIT_WRITE,NET_ADMIN" ]
+       allow_caps = [ "ALL" ]
+    }
 }
+
 
 {% endif %}
 

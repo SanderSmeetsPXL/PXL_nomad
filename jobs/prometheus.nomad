@@ -1,28 +1,29 @@
 job "prometheus" {
   datacenters = ["dc1"]
-  type = "service"
+  type        = "service"
 
   group "monitoring" {
     count = 1
+
     restart {
       attempts = 2
       interval = "30m"
-      delay = "15s"
-      mode = "fail"
+      delay    = "15s"
+      mode     = "fail"
     }
+
     ephemeral_disk {
       size = 300
     }
 
     task "prometheus" {
-      driver = "docker"
+
+    driver = "docker"
 
       config {
         image = "prom/prometheus:latest"
-        force_pull = true
-        port_map = {
-          http = 9090
-        }
+        network_mode="host"
+
         volumes = [
           "/opt/prometheus/:/etc/prometheus/"
         ]
@@ -33,39 +34,39 @@ job "prometheus" {
           "--web.console.templates=/usr/share/prometheus/consoles",
           "--web.enable-admin-api"
         ]
+    
         logging {
           type = "journald"
           config {
             tag = "PROMETHEUS"
           }
         }
+          port_map {
+          prometheus_ui = 9090
+        }
+      
+      }
+      
+
+      resources {
+        network {
+          port  "prometheus_ui"{}
+        }
       }
 
       service {
         name = "prometheus"
-        address_mode = "driver"
-        tags = [
-          "metrics"
-        ]
-        port = "http"
+        tags = ["urlprefix-/"]
+        port = "prometheus_ui"
 
         check {
-          type = "http"
-          path = "/targets"
+          name     = "prometheus_ui port alive"
+          type     = "http"
+          path     = "/-/healthy"
           interval = "10s"
-          timeout = "2s"
+          timeout  = "2s"
           address_mode = "driver"
-        }
-      }
 
-      resources {
-        cpu    = 50
-        memory = 100
-
-        network {
-          port "http" {
-            static = "9090"
-          }
         }
       }
     }

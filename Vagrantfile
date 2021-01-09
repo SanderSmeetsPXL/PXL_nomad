@@ -2,13 +2,14 @@
 # vi: set ft=ruby :
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vbguest.auto_update = false
   config.vm.box = "centos/7"
+  config.vm.synced_folder "prometheus", "/opt/prometheus", type: "rsync", rsync__chown: false
 
   config.vm.define :server do |server|
     server.vm.hostname = "server"
     server.vm.network "private_network", ip: "10.0.0.10", virtualbox_intnet:"mynetwork" 
-
+    server.vm.network "forwarded_port", guest: 9090, host: 9090
+    server.vm.network "forwarded_port", guest: 8500, host: 8500
     server.vm.provision "ansible_local" do |ansible|
       ansible.config_file = "ansible/ansible.cfg"
       ansible.playbook = "ansible/plays/server.yml"

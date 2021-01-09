@@ -61,3 +61,4 @@ job "node-exporter" {
       }
     }
   }
+}

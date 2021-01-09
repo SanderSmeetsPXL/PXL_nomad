@@ -1,0 +1,35 @@
+global:
+  scrape_interval:     5s
+  evaluation_interval: 5s
+
+alerting:
+  alertmanagers:
+  - consul_sd_configs:
+    - server: '{{ env "NOMAD_IP_prometheus_ui" }}:8500'
+      services: ['alertmanager']
+
+scrape_configs:
+
+  - job_name: 'alertmanager'
+
+    consul_sd_configs:
+    - server: '{{ env "NOMAD_IP_prometheus_ui" }}:8500'
+      services: ['alertmanager']
+
+  - job_name: 'nomad_metrics'
+
+    consul_sd_configs:
+    - server: '{{ env "NOMAD_IP_prometheus_ui" }}:8500'
+      services: ['nomad-client', 'nomad']
+
+    relabel_configs:
+    - source_labels: ['__meta_consul_tags']
+      regex: '(.*)http(.*)'
+      action: keep
+    - source_labels: [__meta_consul_service]
+      target_label: job
+
+  - job_name: node
+    static_configs:
+      - targets: ['localhost:9100']
+      
