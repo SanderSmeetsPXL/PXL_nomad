@@ -1,0 +1,10 @@
+
+---
+- name: Start prometheus
+  shell: nomad job run -address=http://10.0.0.10:4646 /opt/jobs/prometheus.nomad || exit 0
+
+- name: Start grafana
+  shell: nomad job run -address=http://10.0.0.10:4646 /opt/jobs/grafana.nomad || exit 0
+
+- name: Start alertmanager
+  shell: nomad job run -address=http://10.0.0.10:4646 /opt/jobs/alertmanager.nomad || exit 0
