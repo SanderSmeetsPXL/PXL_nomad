@@ -31,7 +31,7 @@ scrape_configs:
         services: ['nomad-client', 'nomad']    
     relabel_configs:
       - source_labels: ['__meta_consul_tags']
-        action: replace
-        target_label: instance
+        action: keep
         regex: (.*redis.*)  
+
       
