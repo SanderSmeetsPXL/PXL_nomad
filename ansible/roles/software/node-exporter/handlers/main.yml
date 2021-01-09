@@ -1,0 +1,5 @@
+---
+- name: Started node-exporter
+  service:
+    name: node-exporter
+    state: started
