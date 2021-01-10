@@ -15,31 +15,31 @@ job "alertmanager" {
     }
 
     task "alertmanager" {
-      driver = "docker"
-      config {
-        image = "prom/alertmanager:latest"
-        port_map {
-          alertmanager_ui = 9093
-        }
-      }
-      resources {
-        network {
-          mbits = 10
-          port "alertmanager_ui" {}
-        }
-      }
-      service {
-        name = "alertmanager"
-        tags = ["urlprefix-/alertmanager strip=/alertmanager"]
-        port = "alertmanager_ui"
-        check {
-          name     = "alertmanager_ui port alive"
-          type     = "http"
-          path     = "/-/healthy"
-          interval = "10s"
-          timeout  = "2s"
-        }
-      }
+      
+            driver = "docker"
+            config {
+      	        image = "prom/alertmanager:latest"
+                ports = ["alertmanager_ui"]
+                logging {
+        	        type = "journald"
+                    config {
+          	            tag = "ALERTMANAGER"
+                    }
+                }
+                volumes = [
+          "/opt/prometheus/:/etc/prometheus/"
+        ]
+        args = [
+          "--config.file=/etc/prometheus/prometheus.yml",
+          "--storage.tsdb.path=/prometheus",
+          "--web.console.libraries=/usr/share/prometheus/console_libraries",
+          "--web.console.templates=/usr/share/prometheus/consoles",
+          "--web.enable-admin-api"
+        ]
+            }
+            resources {
+      	        memory = 100
+            }
+  	    }       
     }
-  }
 }
