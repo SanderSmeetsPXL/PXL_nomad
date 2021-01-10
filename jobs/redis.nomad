@@ -42,18 +42,19 @@ job "redis" {
 			}
 		}
       }
-
-      service {
-        name = "global-redis-check"
-        tags = ["global", "database", "urlprefix-/redis","redis" ]
-        port = "db"
-        check {
+ service {
+	        name = "redis"
+            tags =  [
+                "redis", "metrics"
+            ]
+            port = "node_exporter_port"
+           heck {
           name     = "alive"
           type     = "tcp"
           interval = "10s"
           timeout  = "2s"
         }
-      }
+        }
 
 
     }
