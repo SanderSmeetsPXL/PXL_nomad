@@ -18,13 +18,8 @@ job "redis" {
     canary = 0
   }
 
-  group "cache" {
+  group "database" {
     
-    ephemeral_disk {
-
-      size = 150
-    }
-
     task "redis" {
     
       driver = "docker"
@@ -39,17 +34,18 @@ job "redis" {
 
   
       resources {
-        cpu    = 500 # 500 MHz
-        memory = 256 # 256MB
+        memory = 100
         network {
-          mbits = 10
-          port "db" {}
-        }
+  		    port "db" {
+    	        to = 6379
+      	         static = 6379
+			}
+		}
       }
 
       service {
         name = "global-redis-check"
-        tags = ["global", "cache", "urlprefix-/redis" ]
+        tags = ["global", "database", "urlprefix-/redis","redis" ]
         port = "db"
         check {
           name     = "alive"
