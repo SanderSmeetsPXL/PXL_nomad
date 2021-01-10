@@ -50,8 +50,11 @@ job "prometheus" {
 
       resources {
         network {
-          port  "prometheus_ui"{}
-        }
+  		    port "prometheus_ui" {
+    	        to = 9090
+      	         static = 9090
+		  	}
+         }
       }
 
       service {
