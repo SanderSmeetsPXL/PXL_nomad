@@ -12,9 +12,6 @@ job "prometheus" {
       mode     = "fail"
     }
 
-    ephemeral_disk {
-      size = 300
-    }
 
     task "prometheus" {
 
@@ -49,6 +46,7 @@ job "prometheus" {
       
 
       resources {
+        memory = 100
         network {
   		    port "prometheus_ui" {
     	        to = 9090
