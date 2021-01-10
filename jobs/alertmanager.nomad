@@ -10,9 +10,19 @@ job "alertmanager" {
       delay = "15s"
       mode = "fail"
     }
-    ephemeral_disk {
-      size = 300
-    }
+     network {
+  		    port "alertmanager_ui" {
+    	    to = 9093
+      	     static = 9093
+			}
+		}
+        service {
+	        name = "alertmanager"
+            port = "alertmanager_ui"
+            tags = [
+      	        "metrics"
+            ]
+        }
 
     task "alertmanager" {
       
@@ -26,16 +36,7 @@ job "alertmanager" {
           	            tag = "ALERTMANAGER"
                     }
                 }
-                volumes = [
-          "/opt/prometheus/:/etc/prometheus/"
-        ]
-        args = [
-          "--config.file=/etc/prometheus/prometheus.yml",
-          "--storage.tsdb.path=/prometheus",
-          "--web.console.libraries=/usr/share/prometheus/console_libraries",
-          "--web.console.templates=/usr/share/prometheus/consoles",
-          "--web.enable-admin-api"
-        ]
+
             }
             resources {
       	        memory = 100
