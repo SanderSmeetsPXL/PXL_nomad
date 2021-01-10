@@ -88,7 +88,7 @@ scrape_configs:
       - source_labels: ['__meta_consul_tags']
         action: keep
         regex: (.*redis.*)  
-   scrape_interval: 5s
+    scrape_interval: 5s
     metrics_path: /metrics
     params:
       format: ['prometheus']   
