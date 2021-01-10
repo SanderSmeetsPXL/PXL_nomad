@@ -23,6 +23,61 @@ scrape_configs:
     metrics_path: /v1/metrics
     params:
       format: ['prometheus']
+     
+     
+     
+     
+  - job_name: 'prometheus'
+
+    consul_sd_configs:
+    - server: '10.0.0.10:8500'
+      services: ['prometheus']
+
+    relabel_configs:
+    - source_labels: [__meta_consul_service]
+      target_label: job
+    
+    scrape_interval: 5s
+    metrics_path: /metrics
+    params:
+      format: ['prometheus']
+
+
+
+
+  - job_name: 'alertmanager'
+
+    consul_sd_configs:
+    - server: '10.0.0.10:8500'
+      services: ['alertmanager']
+
+    relabel_configs:
+    - source_labels: [__meta_consul_service]
+      target_label: job
+
+    scrape_interval: 5s
+    metrics_path: /metrics
+    params:
+      format: ['prometheus']   
+      
+      
+      
+      
+   - job_name: 'nodes'
+
+    consul_sd_configs:
+    - server: '10.0.0.10:8500'
+      services: ['node-exporter']
+
+    relabel_configs:
+    - source_labels: [__meta_consul_service]
+      target_label: job
+    
+    scrape_interval: 5s
+    metrics_path: /metrics
+    params:
+      format: ['prometheus']
+    
 
   - job_name: 'redis'
     consul_sd_configs:
@@ -33,5 +88,9 @@ scrape_configs:
       - source_labels: ['__meta_consul_tags']
         action: keep
         regex: (.*redis.*)  
+   scrape_interval: 5s
+    metrics_path: /metrics
+    params:
+      format: ['prometheus']   
 
       
