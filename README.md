@@ -1,4 +1,5 @@
 In dit project wordt nomad, consul en redis gemonitord door prometheus en grafana.
+Dit door middel van nomad jobs.
 
 ## Prometheus
 Prometheus wordt als monitoringstool gebruikt en is een job. Via de prometheus.yml file worden de configuraties van de jobs ingesteld. 
