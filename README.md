@@ -26,7 +26,7 @@ scrape_configs:
       format: ['prometheus']
 ```     
 
-# Consul Monitoring
+## Consul Monitoring
 
 
 # Node-exporter
