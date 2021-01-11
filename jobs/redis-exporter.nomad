@@ -3,7 +3,7 @@ job "redis-exporter" {
     type        = "service"
 
     group "redis-exporter" {
-        count = 4
+        count = 5
   	    network {
   		    port "redis_exporter_port" {
     	        to = 9121
@@ -20,7 +20,7 @@ job "redis-exporter" {
 	    task "redis-exporter" {
             driver = "docker"
             config {
-      	        image = "oliver006/redis_exporter"
+     	        image = "oliver006/redis_exporter"
                 args = [
                     "--redis.addr=127.0.0.1:6379"
                     ]
