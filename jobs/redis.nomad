@@ -6,7 +6,7 @@ job "redis" {
 
   constraint {
      attribute = "${attr.kernel.name}"
-    value     = "linux"
+     value     = "linux"
    }
 
   update {
@@ -42,7 +42,7 @@ job "redis" {
 			}
 		}
       }
- service {
+      service {
 	        name = "redis"
             tags =  [
                 "redis", "metrics"

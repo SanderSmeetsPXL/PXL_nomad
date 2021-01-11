@@ -5,7 +5,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vbguest.auto_update = false
   config.vm.box = "centos/7"
   config.vm.synced_folder "prometheus", "/opt/prometheus", type: "rsync", rsync__chown: false
-  
+  config.vm.synced_folder "Alerting", "/opt/alerting", type: "rsync", rsync__chown: false
+
 
   config.vm.define :server do |server|
     server.vm.hostname = "server"
