@@ -24,6 +24,9 @@ job "grafana" {
           	            tag = "GRAFANA"
                     }
                 }
+            }
+             resources {
+      	        memory = 100
             } 
   	    } 
     }
