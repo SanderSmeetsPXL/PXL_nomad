@@ -10,7 +10,7 @@ alerting:
       services: ['alertmanager']
      
 rule_files:
-  - "/etc/prometheus/alert.rules"
+  - alert.rules
 
 scrape_configs:
 
@@ -81,3 +81,4 @@ scrape_configs:
     metrics_path: /metrics
     params:
       format: ['prometheus']    
+

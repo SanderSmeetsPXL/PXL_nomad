@@ -1,4 +1,4 @@
-job "node_exporter" {
+job "node-exporter" {
     datacenters = ["dc1"]
     type        = "service"
 

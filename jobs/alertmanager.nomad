@@ -30,6 +30,10 @@ job "alertmanager" {
             resources {
       	        memory = 100
             }
+            service {
+              name = "alertmanager"
+              tags = ["metrics"]
+		        }
   	    }       
     }
 }

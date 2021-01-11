@@ -6,15 +6,9 @@ job "prometheus" {
   group "app" {
     count = 1
 
-    restart {
-      attempts = 3
-      delay    = "20s"
-      mode     = "delay"
-    }
-
     task "prometheus" {
       driver = "docker"
- 
+      
 
       config {
         image = "prom/prometheus:latest"
@@ -23,8 +17,16 @@ job "prometheus" {
           http = 9090
         }
         volumes = [
-          "/opt/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml",
-          "/opt/prometheus/alert.rules:/etc/prometheus/alert.rules",
+          "/opt/prometheus/:/etc/prometheus/",                    
+   
+        ]
+        args = [
+          "--config.file=/etc/prometheus/prometheus.yml",
+          "--storage.tsdb.path=/prometheus",
+		      "--web.enable-lifecycle",
+          "--web.console.libraries=/usr/share/prometheus/console_libraries",
+          "--web.console.templates=/usr/share/prometheus/consoles",
+          "--web.enable-admin-api"
         ]
       
         logging {
@@ -42,13 +44,6 @@ job "prometheus" {
           "metrics"
         ]
         port = "http"
-
-        check {
-          type = "http"
-          path = "/targets"
-          interval = "10s"
-          timeout = "2s"
-        }
       }
 
       resources {
