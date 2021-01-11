@@ -1,59 +1,64 @@
 job "prometheus" {
+  region = "global"
   datacenters = ["dc1"]
-  type        = "service"
+  type = "service"
 
-  group "monitoring" {
+  group "app" {
     count = 1
 
     restart {
-      attempts = 2
-      interval = "30m"
-      delay    = "15s"
-      mode     = "fail"
+      attempts = 3
+      delay    = "20s"
+      mode     = "delay"
     }
 
-
     task "prometheus" {
-
       driver = "docker"
+ 
 
       config {
         image = "prom/prometheus:latest"
-
-         volumes = [
-          "/opt/prometheus/:/etc/prometheus/"
-        ]
-        args = [
-          "--config.file=/etc/prometheus/prometheus.yml",
-          "--storage.tsdb.path=/prometheus",
-          "--web.console.libraries=/usr/share/prometheus/console_libraries",
-          "--web.console.templates=/usr/share/prometheus/consoles",
-          "--web.enable-admin-api"
-        ]
-
-        port_map {
-          prometheus_ui = 9090
+        force_pull = true
+        port_map = {
+          http = 9090
         }
-      }
-
-      resources {
-        network {
-          mbits = 10
-          port  "prometheus_ui"{}
+        volumes = [
+          "/opt/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml", 
+          "/opt/prometheus/alert.yml:/etc/prometheus/alert.yml"  
+        ]
+      
+        logging {
+          type = "journald"
+          config {
+            tag = "PROMETHEUS"
+          }
         }
       }
 
       service {
         name = "prometheus"
-        tags = ["urlprefix-/"]
-        port = "prometheus_ui"
+       
+        tags = [
+          "metrics"
+        ]
+        port = "http"
 
         check {
-          name     = "prometheus_ui port alive"
-          type     = "http"
-          path     = "/-/healthy"
+          type = "http"
+          path = "/targets"
           interval = "10s"
-          timeout  = "2s"
+          timeout = "2s"
+        }
+      }
+
+      resources {
+        cpu    = 50
+        memory = 100
+
+        network {
+          port "http" {
+            static = "9090"
+          }
         }
       }
     }

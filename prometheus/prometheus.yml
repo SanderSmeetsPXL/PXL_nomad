@@ -8,8 +8,7 @@ alerting:
   - consul_sd_configs:
     - server: '10.0.0.10:8500'
       services: ['alertmanager']
-rule_files:
-  - alert.rules
+
 
 scrape_configs:
 
@@ -61,9 +60,8 @@ scrape_configs:
     - server: '10.0.0.10:8500'
       services: ['redis']     
     relabel_configs:
-      - source_labels: ['__meta_consul_service']
-        action: keep
-        regex: (.*redis.*)  
+    - source_labels: [__meta_consul_service]
+      target_label: job 
     scrape_interval: 5s
     metrics_path: /metrics
     params:
