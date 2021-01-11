@@ -73,4 +73,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "hosts" => ["host4"]}
     end
   end
+   config.vm.define :host5 do |host5|
+    host5.vm.hostname = "host5"
+    host5.vm.network "private_network", ip: "10.0.0.15",virtualbox_intnet:"mynetwork" 
+    host5.vm.provision "ansible_local" do |ansible|
+      ansible.config_file = "ansible/ansible.cfg"
+      ansible.playbook = "ansible/plays/server.yml"
+      ansible.groups = {
+        "hosts" => ["host5"]}
+    end
+  end
 end

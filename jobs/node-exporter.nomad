@@ -3,7 +3,7 @@ job "node-exporter" {
     type        = "service"
 
     group "node-exporter" {
-        count = 4
+        count = 5
   	    network {
   		    port "node_exporter_port" {
     	        to = 9100

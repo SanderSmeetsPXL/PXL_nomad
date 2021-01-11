@@ -47,7 +47,6 @@ job "prometheus" {
       }
 
       resources {
-        cpu    = 50
         memory = 100
 
         network {
