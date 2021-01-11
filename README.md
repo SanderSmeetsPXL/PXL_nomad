@@ -1,4 +1,5 @@
 In dit project wordt nomad, consul en redis gemonitord door prometheus en grafana.
+Dit door middel van nomad jobs.
 
 ## Prometheus
 Prometheus wordt als monitoringstool gebruikt en is een job. Via de prometheus.yml file worden de configuraties van de jobs ingesteld. 
@@ -87,7 +88,7 @@ Door een redis exporter job aan te maken is het mogelijk redis alerts te voorzie
 ```
 
 ## Taakverdeling
-We hebben niet echt een taakverdeling gemaakt.We hebben samen aan alles gewerkt.
+We hebben niet echt een taakverdeling gemaakt.We hebben beid overal aan gewerkt.
 
 ## Bronvermelding
 
