@@ -47,7 +47,7 @@ job "redis" {
             tags =  [
                 "redis", "metrics"
             ]
-            port = "node_exporter_port"
+            port = "db"
            heck {
           name     = "alive"
           type     = "tcp"
