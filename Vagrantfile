@@ -5,7 +5,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vbguest.auto_update = false
   config.vm.box = "centos/7"
   config.vm.synced_folder "prometheus", "/opt/prometheus", type: "rsync", rsync__chown: false
-  config.vm.network "forwarded_port", guest: 9090, host: 9999, auto_correct: true, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 9090, host: 9090, auto_correct: true, host_ip: "127.0.0.1"
   config.vm.network "forwarded_port", guest: 6379, host: 6379, auto_correct: true, host_ip: "127.0.0.1"
 
 

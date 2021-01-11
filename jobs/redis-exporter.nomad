@@ -21,16 +21,8 @@ job "redis-exporter" {
             driver = "docker"
             config {
       	        image = "oliver006/redis_exporter"
-                ports = ["redis_exporter_port"]
-                args = [
-                    "--redis.addr=127.0.0.1:6379",
-                ]
-                logging {
-        	        type = "journald"
-                    config {
-          	            tag = "NODE_EXPORTER"
-                    }
-                }
+                args = ["-redis.addr", "localhost:6379", "-web.listen-address", "localhost:9021"]
+                
             }
             resources {
       	        memory = 100
