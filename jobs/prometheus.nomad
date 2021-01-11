@@ -23,7 +23,8 @@ job "prometheus" {
           http = 9090
         }
         volumes = [
-          "/opt/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+          "/opt/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml",
+          "/opt/prometheus/alert.rules:/etc/prometheus/alert.rules",
         ]
       
         logging {

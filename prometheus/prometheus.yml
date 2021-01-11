@@ -8,8 +8,9 @@ alerting:
   - consul_sd_configs:
     - server: '10.0.0.10:8500'
       services: ['alertmanager']
+     
 rule_files:
-  - alert.rules
+  - "/etc/prometheus/alert.rules"
 
 scrape_configs:
 
