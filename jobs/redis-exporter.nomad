@@ -21,7 +21,9 @@ job "redis-exporter" {
             driver = "docker"
             config {
       	        image = "oliver006/redis_exporter"
-                args = ["-redis.addr", "127.0.0.1:6379", "-web.listen-address", "127.0.0.1:9021"]
+                args = [
+                    "--redis.addr=127.0.0.1:6379"
+                    ]
                 
             }
             resources {
