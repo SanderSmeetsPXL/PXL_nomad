@@ -12,9 +12,6 @@ job "prometheus" {
       mode     = "fail"
     }
 
-    ephemeral_disk {
-      size = 300
-    }
 
     task "prometheus" {
 

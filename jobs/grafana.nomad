@@ -1,4 +1,3 @@
-
 job "grafana" {
     datacenters = ["dc1"]
     type        = "service"
@@ -18,9 +17,7 @@ job "grafana" {
             driver = "docker"
             config {
       	        image = "grafana/grafana:latest"
-                port_map {
-                   grafana_ui = 3000
-                }
+                ports = ["grafana_ui"]
                 logging {
         	        type = "journald"
                     config {
@@ -31,5 +28,3 @@ job "grafana" {
   	    } 
     }
 }
-
-      
