@@ -41,7 +41,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "hosts" => ["host1"]}
     end
   end
-
   config.vm.define :host2 do |host2|
     host2.vm.hostname = "host2"
     host2.vm.network "private_network", ip: "10.0.0.12",virtualbox_intnet:"mynetwork" 
@@ -50,26 +49,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.playbook = "ansible/plays/server.yml"
       ansible.groups = {
         "hosts" => ["host2"]}
-    end
-  end
-    config.vm.define :host3 do |host3|
-    host3.vm.hostname = "host3"
-    host3.vm.network "private_network", ip: "10.0.0.13",virtualbox_intnet:"mynetwork" 
-    host3.vm.provision "ansible_local" do |ansible|
-      ansible.config_file = "ansible/ansible.cfg"
-      ansible.playbook = "ansible/plays/server.yml"
-      ansible.groups = {
-        "hosts" => ["host3"]}
-    end
-  end
-   config.vm.define :host4 do |host4|
-    host4.vm.hostname = "host4"
-    host4.vm.network "private_network", ip: "10.0.0.14",virtualbox_intnet:"mynetwork" 
-    host4.vm.provision "ansible_local" do |ansible|
-      ansible.config_file = "ansible/ansible.cfg"
-      ansible.playbook = "ansible/plays/server.yml"
-      ansible.groups = {
-        "hosts" => ["host4"]}
     end
   end
 end
