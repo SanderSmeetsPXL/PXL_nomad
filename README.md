@@ -45,3 +45,7 @@ We hebben niet echt een taakverdeling gemaakt.We hebben samen aan alles gewerkt.
 
 # Bronvermelding
 
+https://github.com/oliver006/redis_exporter <br>
+https://github.com/prometheus/consul_exporter <br>
+
+
