@@ -16,13 +16,7 @@ job "alertmanager" {
       	     static = 9093
 			}
 		}
-        service {
-	        name = "alertmanager"
-            port = "alertmanager_ui"
-            tags = [
-      	        "metrics"
-            ]
-        }
+       
 
     task "alertmanager" {
       

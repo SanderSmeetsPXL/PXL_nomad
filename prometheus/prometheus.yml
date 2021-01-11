@@ -8,6 +8,8 @@ alerting:
   - consul_sd_configs:
     - server: '10.0.0.10:8500'
       services: ['alertmanager']
+rule_files:
+  - alert.rules
 
 scrape_configs:
 
@@ -31,21 +33,6 @@ scrape_configs:
 
     scrape_interval: 5s
     metrics_path: /v1/metrics
-    params:
-      format: ['prometheus']
-     
-     
-  - job_name: 'prometheus'
-    consul_sd_configs:
-    - server: '10.0.0.10:8500'
-      services: ['prometheus']
-
-    relabel_configs:
-    - source_labels: [__meta_consul_service]
-      target_label: job
-    
-    scrape_interval: 5s
-    metrics_path: /metrics
     params:
       format: ['prometheus']
 
@@ -108,7 +95,7 @@ scrape_configs:
       params:
         format: ['prometheus']   
 
-  - job_name: 'consul'
+  - job_name: 'consul-exporter'
     consul_sd_configs:
     - server: '10.0.0.10:8500'
       services: ['consul-exporter']

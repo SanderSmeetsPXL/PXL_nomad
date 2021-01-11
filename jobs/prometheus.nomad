@@ -12,50 +12,38 @@ job "prometheus" {
       mode     = "fail"
     }
 
+    ephemeral_disk {
+      size = 300
+    }
 
     task "prometheus" {
 
-    driver = "docker"
+      driver = "docker"
 
       config {
         image = "prom/prometheus:latest"
-        network_mode="host"
 
-        volumes = [
-          "/opt/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml",
-          "/opt/alerting/:/etc/alerting/",
-
+         volumes = [
+          "/opt/prometheus/:/etc/prometheus/"
         ]
         args = [
           "--config.file=/etc/prometheus/prometheus.yml",
-          "--config.file=/etc/prometheus/alert.rules",
           "--storage.tsdb.path=/prometheus",
           "--web.console.libraries=/usr/share/prometheus/console_libraries",
           "--web.console.templates=/usr/share/prometheus/consoles",
           "--web.enable-admin-api"
         ]
-    
-        logging {
-          type = "journald"
-          config {
-            tag = "PROMETHEUS"
-          }
-        }
-          port_map {
+
+        port_map {
           prometheus_ui = 9090
         }
-      
       }
-      
 
       resources {
-        memory = 100
         network {
-  		    port "prometheus_ui" {
-    	        to = 9090
-      	         static = 9090
-		  	}
-         }
+          mbits = 10
+          port  "prometheus_ui"{}
+        }
       }
 
       service {
@@ -69,8 +57,6 @@ job "prometheus" {
           path     = "/-/healthy"
           interval = "10s"
           timeout  = "2s"
-          address_mode = "driver"
-
         }
       }
     }

@@ -19,7 +19,7 @@ job "redis" {
   }
 
   group "database" {
-    
+
     task "redis" {
     
       driver = "docker"
@@ -28,7 +28,7 @@ job "redis" {
       config {
         image = "redis:3.2"
         port_map {
-          db = 6379
+          redis_ui = 6379
         }
       }
 
@@ -36,27 +36,20 @@ job "redis" {
       resources {
         memory = 100
         network {
-  		    port "db" {
+  		    port "redis_ui" {
     	        to = 6379
       	         static = 6379
 			}
 		}
       }
-      service {
+     service {
 	        name = "redis"
-            tags =  [
-                "redis", "metrics"
+            port = "redis_ui"
+            tags = [
+      	        "metrics"
             ]
-            port = "db"
-           heck {
-          name     = "alive"
-          type     = "tcp"
-          interval = "10s"
-          timeout  = "2s"
         }
-        }
-
 
     }
+    }
   }
-}

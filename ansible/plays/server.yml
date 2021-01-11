@@ -9,10 +9,3 @@
     - role: software/docker
     - role: software/nomad
   
-
-- name: run jobs 
-  hosts: server
-  become: yes
-
-  roles:
-    - role: software/jobs

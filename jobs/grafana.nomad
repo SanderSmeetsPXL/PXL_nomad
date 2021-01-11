@@ -18,7 +18,9 @@ job "grafana" {
             driver = "docker"
             config {
       	        image = "grafana/grafana:latest"
-                ports = ["grafana_ui"]
+                port_map {
+                   grafana_ui = 3000
+                }
                 logging {
         	        type = "journald"
                     config {
@@ -29,3 +31,5 @@ job "grafana" {
   	    } 
     }
 }
+
+      
