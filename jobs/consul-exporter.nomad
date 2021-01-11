@@ -20,7 +20,7 @@ job "consul-exporter" {
 	    task "consul_exporter" {
             driver = "docker"
             config {
-      	        image = "prometheus/consul_exporter"
+      	        image = "prom/consul-exporter:latest"
                 ports = ["consul_exporter_port"]
                 args = [
                     "--consul.server=10.0.0.10:8500",

@@ -23,10 +23,18 @@ job "prometheus" {
 
         volumes = [
           "/opt/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml",
-          "/opt/alerting/alert.rules:/etc/alerting/alert.rules",
+          "/opt/alerting/:/etc/alerting/",
 
-        ],
-
+        ]
+        args = [
+          "--config.file=/etc/prometheus/prometheus.yml",
+          "--config.file=/etc/prometheus/alert.rules",
+          "--storage.tsdb.path=/prometheus",
+          "--web.console.libraries=/usr/share/prometheus/console_libraries",
+          "--web.console.templates=/usr/share/prometheus/consoles",
+          "--web.enable-admin-api"
+        ]
+    
         logging {
           type = "journald"
           config {
