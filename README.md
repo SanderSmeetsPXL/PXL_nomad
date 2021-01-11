@@ -87,7 +87,7 @@ Door een redis exporter job aan te maken is het mogelijk redis alerts te voorzie
 ```
 
 ## Taakverdeling
-We hebben niet echt een taakverdeling gemaakt.We hebben samen aan alles gewerkt.
+We hebben niet echt een taakverdeling gemaakt.We hebben beid overal aan gewerkt.
 
 ## Bronvermelding
 
