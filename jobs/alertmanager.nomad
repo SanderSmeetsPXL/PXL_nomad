@@ -33,6 +33,8 @@ job "alertmanager" {
             service {
               name = "alertmanager"
               tags = ["metrics"]
+              port = "alertmanager_ui"
+
 		        }
   	    }       
     }
