@@ -10,28 +10,20 @@ Grafana wordt gebruikt als dashboard. Via de json files in de dashboard map kunn
 Via de prometheus.yml file kunnen we nomad monitoren en alerts aanmaken door de nomad metrics mee te geven.
 
 ```bash
-- job_name: 'nomad_metrics'
+ - job_name: 'nomad_metrics'
     consul_sd_configs:
       - server: '10.0.0.10:8500'
         datacenter: 'dc1'
         services: ['nomad-client', 'nomad']
-    relabel_configs:
-    - source_labels: [__meta_consul_tags]
-      separator: ;
-      regex: (.*)http(.*)
-      replacement: $1
-      action: keep
-    - source_labels: [__meta_consul_address]
-      separator: ;
-      regex: (.*)
-      target_label: __meta_consul_service_address
-      replacement: $1
-      action: replace
-
-    scrape_interval: 5s
-    metrics_path: /v1/metrics
-    params:
-      format: ['prometheus']
+    relabel_configs:                          
+    - source_labels: ['__meta_consul_tags']   
+      regex: '(.*)http(.*)'                   
+      action: keep                            
+                                              
+    scrape_interval: 5s                       
+    metrics_path: /v1/metrics                 
+    params:                                   
+      format: ['prometheus'] 
 ```     
 
 ## Consul exporter
