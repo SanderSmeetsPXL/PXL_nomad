@@ -5,13 +5,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vbguest.auto_update = false
   config.vm.box = "centos/7"
   config.vm.synced_folder "prometheus", "/opt/prometheus", type: "rsync", rsync__chown: false
+  config.vm.network "forwarded_port", guest: 9090, host: 9090, auto_correct: true, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 6379, host: 6379, auto_correct: true, host_ip: "127.0.0.1"
+
 
   config.vm.define :server do |server|
     server.vm.hostname = "server"
     server.vm.network "private_network", ip: "10.0.0.10", virtualbox_intnet:"mynetwork" 
     server.vm.network "forwarded_port", guest: 4646, host: 4646, auto_correct: true, host_ip: "127.0.0.1"
 	  server.vm.network "forwarded_port", guest: 8500, host: 8500, auto_correct: true, host_ip: "127.0.0.1"
-    server.vm.network "forwarded_port", guest: 9090, host: 9090, auto_correct: true, host_ip: "127.0.0.1"
+    
     server.vm.synced_folder "jobs", "/opt/jobs", type: "rsync", rsync__chown: false
     
     server.vm.provision "ansible_local" do |ansible|

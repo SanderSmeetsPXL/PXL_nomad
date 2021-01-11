@@ -4,12 +4,7 @@ job "alertmanager" {
 
   group "alerting" {
     count = 1
-    restart {
-      attempts = 2
-      interval = "30m"
-      delay = "15s"
-      mode = "fail"
-    }
+
      network {
   		    port "alertmanager_ui" {
     	    to = 9093
